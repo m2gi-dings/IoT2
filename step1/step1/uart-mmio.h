@@ -26,15 +26,17 @@
  * We need the base address for the different serial lines.
  */
 
-#define UART0_BASE_ADDRESS ((void*)0x0000000) // ???
-#define UART1_BASE_ADDRESS ((void*)0x0000000) // ???
-#define UART2_BASE_ADDRESS ((void*)0x0000000) // ???
+#define UART0_BASE_ADDRESS ((void*)0x101F1000) // ???
+#define UART1_BASE_ADDRESS ((void*)0x101F2000) // ???
+#define UART2_BASE_ADDRESS ((void*)0x101F3000) // ???
 
 /*
  * Is the UART chipset a PL011?
  * If so, we need the details for the data and status registers.
  */
-#define UART_DR 0x00 // ???
-#define UART_FR 0x00 // ???
+#define UART_DR 0x000 // ???
+#define UART_FR 0x018 // ???
+#define UART_FR_RXFE (1 << 4)
+#define UART_FR_TXFF (1 << 5)
 
 #endif /* UART_MMIO_H_ */

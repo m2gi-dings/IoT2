@@ -23,6 +23,11 @@
 #define UART0 0
 #define UART1 1
 #define UART2 2
+#define UART_CR 0x0000
+#define UART_SR 0x002C
+#define UART_FIFO 0x0030
+#define UART_SR_REMPTY (1 << 1)
+#define UART_SR_TFUL (1 << 4)
 
 /*
  * Receives a one-byte character, which is compatible
