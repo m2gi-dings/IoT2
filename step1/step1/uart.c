@@ -62,7 +62,7 @@ void uart_receive(uint8_t uartno, char *pt) {
   while (*(volatile uint32_t*)(uart->bar + uart_fr) & uart_fr_rxfe){
     for (volatile int i = 0; i < 1000; i++){}
   }
-  *pt = *(volatile uint32_t*)(uart->bar + UART_DR);
+  *pt = *(volatile uint32_t*)(uart->bar + uart_dr);
   // volatile uint32_t* uart_sr = (uint32_t*)(uart->bar + UART_SR);
   // volatile uint32_t* uart_fifo = (uint32_t*)(uart->bar + UART_FIFO);
   // while(*uart_sr & UART_SR_REMPTY);

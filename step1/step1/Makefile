@@ -89,7 +89,7 @@ clean:
 ifeq ($(BOARD),versatile)
 run: all
 	@echo "\n\nBoard: Versatile Board...\n"
-	$(QEMU) $(QEMU_ARGS) -device loader,file=$(BUILD)kernel.elf
+	$(QEMU) $(QEMU_ARGS) -device loader,file=$(BUILD)kernel.elf -audio none
 
 debug: all
 	@echo "\n\nBoard: Versatile Board...\n"
