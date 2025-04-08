@@ -47,8 +47,10 @@ struct handler handlers[NIRQS];
 void isr() {
   uint32_t irq_status = *vicIrqStatus;
   for(uint32_t irq = 0; irq < NIRQS; irq ++){
-    if(handlers[irq].callback)
-      handlers[irq].callback(irq, handlers[irq].cookie);
+    if(irq_status & (1 << irq)){
+      if(handlers[irq].callback != NULL)
+        handlers[irq].callback(irq, handlers[irq].cookie);
+    }
     *vicIntClear = (1 << irq);
   }
 }
