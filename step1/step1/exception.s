@@ -47,7 +47,15 @@ irq_handler_addr: .word _isr_handler
 fiq_handler_addr: .word _fiq_handler
 
 _isr_handler:
-    b .  // unexpected interrupt occurred
+    sub lr, lr, #4
+    stmfd sp!, {r0-r12, lr}
+
+    ldr r0, =0x101F1000 // address base of UART0
+    ldr r1, [r0, #0x000] // read uart_dr
+
+    bl isr
+
+    ldmfd sp!, {r0-r12, lr}^ // unexpected interrupt occurred
 
 _unused_handler:
     b .  // unused interrupt occurred

@@ -14,6 +14,7 @@
 
 #include "main.h"
 #include "isr.h"
+#include "uart.h"
 #include "isr-mmio.h"
 
 /*
@@ -46,11 +47,18 @@ struct handler handlers[NIRQS];
  */
 void isr() {
   uint32_t irq_status = *vicIrqStatus;
-  for(uint32_t irq = 0; irq < NIRQS; irq ++){
-    if(irq_status & (1 << irq)){
-      if(handlers[irq].callback != NULL)
-        handlers[irq].callback(irq, handlers[irq].cookie);
-    }
+  // for(uint32_t irq = 0; irq < NIRQS; irq ++){
+  //   if(irq_status & (1 << irq)){
+  //     if(handlers[irq].callback != NULL)
+  //       handlers[irq].callback(irq, handlers[irq].cookie);
+  //   }
+  //   *vicIntClear = (1 << irq);
+  // }
+  if(irq_status & (1 << UART0_IRQ)) {
+    char c;
+    uart_receive(UART0, &c);
+    uart_send(UART0, c);
+
     *vicIntClear = (1 << irq);
   }
 }
