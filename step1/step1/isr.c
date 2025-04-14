@@ -59,7 +59,7 @@ void isr() {
     uart_receive(UART0, &c);
     uart_send(UART0, c);
 
-    *vicIntClear = (1 << irq);
+    *vicIntClear = (1 << UART0_IRQ);
   }
 }
 

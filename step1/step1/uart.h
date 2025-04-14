@@ -11,7 +11,7 @@
  * You should have received a copy of the GNU General Public License along with this program.
  * If not, see <https://www.gnu.org/licenses/>.
  */
-
+#include <stdbool.h>
 #ifndef UART_H_
 #define UART_H_
 
@@ -28,6 +28,7 @@
 #define UART_FIFO 0x0030
 #define UART_SR_REMPTY (1 << 1)
 #define UART_SR_TFUL (1 << 4)
+#define MAX_CHARS 512
 
 /*
  * Receives a one-byte character, which is compatible
@@ -36,7 +37,7 @@
  * there is at least one character available in the
  * UART RX FIFO queue.
  */
-void uart_receive(uint8_t uartno, char *pt);
+bool uart_receive(uint8_t uartno, char *pt);
 
 /**
  * Write a one-byte character through the given uart,
@@ -45,7 +46,7 @@ void uart_receive(uint8_t uartno, char *pt);
  * until there is room in the UART TX FIFO queue to send
  * the character.
  */
-void uart_send(uint8_t uartno, char s);
+bool uart_send(uint8_t uartno, char s);
 
 /**
  * This is a wrapper function, provided for simplicity,
